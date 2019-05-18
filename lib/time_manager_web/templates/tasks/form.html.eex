@@ -1,0 +1,33 @@
+<br>
+<%= form_for @changeset, @action, [as: :post], fn f-> %>
+
+    <div class="form-group">
+        <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+        <span class="text-danger"><%= error_tag f, :title %></span>
+    </div>
+
+    <div class="form-group">
+        <%= number_input f, :priority, placeholder: 0, class: "form-control" %>
+        <span class="text-danger"><%= error_tag f, :priority %></span>
+    </div>
+
+    <div class="form-group">
+        <%= datetime_local_input f, :temp_date_start, class: "form-control " %>
+        <span class="text-danger"><%= error_tag f, :temp_date_start %></span>
+    </div>
+
+    <div class="form-group">
+        <%= color_input f, :color, class: "form-control " %>
+        <span class="text-danger"><%= error_tag f, :color %></span>
+    </div>
+
+    <div class="form-group">
+        <%= datetime_local_input f, :temp_date_end, class: "form-control " %>
+        <span class="text-danger"><%= error_tag f, :temp_date_end %></span>
+    </div>
+
+    <div class="form-group">
+        <%= submit "Submit", class: "btn btn-primary float-right" %>
+    </div>
+
+<% end %>

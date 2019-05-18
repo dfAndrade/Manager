@@ -1,0 +1,27 @@
+<div class="phx-hero">
+    <h2>Tasks!</h2>
+    <table>
+            <thead>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Date Start</th>
+                <th>Date End</th>
+                <th>Date Completed</th>
+            </thead>
+            <tbody>
+            <%= for task <- @tasks do %>
+            <tr style="background-color: <%=task.color%>">
+                <td><%=task.title%></td>
+                <td><%=task.priority%></td>
+                <td><%=task.date_start%></td>
+                <td><%=task.date_end%></td>
+                <td><%=task.date_completed%></td>
+            </tr>
+            <% end %>
+                <tr></tr>
+            </tbody>
+        </table>
+        <%= button("New Post", method: "get", to: tasks_path(@conn, :new), class: "btn btn-sm btn-info") %>
+
+
+</div>

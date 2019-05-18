@@ -1,0 +1,7 @@
+<nav class="navbar navbar-default">
+  <ul>
+    <%=for tab <- @tabs do %>
+    <%= navbar_item active: tab.active, text: tab.text, to: tab.to%>
+    <% end%>
+  </ul>
+</nav>

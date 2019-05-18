@@ -1,0 +1,7 @@
+<%= if @active do %>
+<li class="active">
+<% else %>
+<li>
+<% end %>
+<%=link @text, to: @to.() %>
+</li>

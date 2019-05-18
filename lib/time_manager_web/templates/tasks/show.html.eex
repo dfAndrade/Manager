@@ -1,0 +1,4 @@
+<div class="phx-hero">
+    <%= render @view_module, "calendar.html", assigns %>
+
+</div>
