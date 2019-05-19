@@ -1,0 +1,9 @@
+<th>
+<%= if @active do %>
+<span class="day active"><%=@day%></span>
+<% else %>
+<span class="day"><%=@day%></span>
+<% end %>
+    <span class="long"><%=@week_str%></span>
+    <span class="short"><%=@trimmed%></span>
+</th>

@@ -2,7 +2,6 @@ defmodule TimeManagerWeb.LayoutView do
   use TimeManagerWeb, :view
 
   def navbar_item(assigns) do
-
     render "navbar_item.html", assigns
   end
 

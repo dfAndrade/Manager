@@ -18,9 +18,8 @@
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 .navbar li a:hover {
-    border: 1px solid white;
+    background-color: #000;
 }
 
 .navbar li a.active {

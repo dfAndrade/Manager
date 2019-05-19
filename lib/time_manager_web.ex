@@ -31,6 +31,7 @@ defmodule TimeManagerWeb do
     quote do
       use Phoenix.View,
         root: "lib/time_manager_web/templates",
+        pattern: "**/*",
         namespace: TimeManagerWeb
 
       # Import convenience functions from controllers

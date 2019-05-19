@@ -1,5 +1,6 @@
 <div class="phx-hero">
     <h2>Tasks!</h2>
+    <%= render TimeManagerWeb.TasksView, "calendar/calendar.html"%>
     <table>
             <thead>
                 <th>Title</th>
@@ -10,8 +11,10 @@
             </thead>
             <tbody>
             <%= for task <- @tasks do %>
-            <tr style="background-color: <%=task.color%>">
-                <td><%=task.title%></td>
+            <tr>
+                <td>
+                    <div class="square" style="background-color: <%=task.color%>"></div><div class="task_title"><%=task.title%></div>
+                </td>
                 <td><%=task.priority%></td>
                 <td><%=task.date_start%></td>
                 <td><%=task.date_end%></td>
