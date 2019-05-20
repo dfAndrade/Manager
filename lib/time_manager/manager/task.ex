@@ -3,6 +3,7 @@ defmodule TimeManager.Manager.Task do
 
   import Ecto.Query
   import Ecto.Changeset
+  import TimeManager.Utils
 
   alias TimeManager.Repo
   alias TimeManager.Manager.Task
@@ -36,11 +37,11 @@ defmodule TimeManager.Manager.Task do
   defp parse_date(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{:temp_date_start => date_start} = changes} ->
-        formatted_date_start = NaiveDateTime.from_iso8601!(date_start <> ":00")
+        formatted_date_start = parse_naive_datetime(date_start)
         changeset = put_change(changeset, :date_start, formatted_date_start)
         case Map.fetch(changes, :temp_date_end) do
           {:ok, date_end} ->
-            put_change(changeset, :date_end, NaiveDateTime.from_iso8601!(date_end <> ":00"))
+            put_change(changeset, :date_end, parse_naive_datetime(date_end))
           :error ->
             put_change(changeset, :date_end, NaiveDateTime.add(formatted_date_start, 60 * 60, :second))
         end
@@ -48,6 +49,8 @@ defmodule TimeManager.Manager.Task do
         changeset
     end
   end
+
+
 
   defp init_color(changeset) do
     case changeset do
@@ -58,6 +61,17 @@ defmodule TimeManager.Manager.Task do
       _ ->
         put_change(changeset, :color, "#ffffff")
      end
+  end
+
+  def task_json(task) do
+    %{
+      title: task.title,
+      color: task.color,
+      priority: task.priority,
+      date_completed: task.date_completed,
+      date_start: task.date_start,
+      date_end: task.date_end,
+    }
   end
 
   # defp safe_truncate(%Changeset{} = cs) do
@@ -71,6 +85,24 @@ defmodule TimeManager.Manager.Task do
 
   def get_all do
     (from t in Task)
+    |> Repo.all
+  end
+
+  def get_from_period(start_date, end_date) when is_nil(start_date) and is_nil(end_date), do: IO.inspect("Test")
+
+  def get_from_period(start_date, end_date)  when is_bitstring(start_date) and is_bitstring(end_date) do
+    IO.inspect(start_date)
+    f_start = parse_naive_datetime(start_date)
+    f_end = parse_naive_datetime(end_date)
+    get_from_period(f_start, f_end)
+  end
+
+  def get_from_period(start_date, end_date) do
+    (from t in Task,
+      select: t,
+      where: ((t.date_start >= ^start_date and t.date_end <= ^end_date) or
+             (t.date_start <= ^start_date and t.date_end >= ^start_date) or
+             (t.date_end >= ^end_date and t.date_start <= ^end_date)))
     |> Repo.all
   end
 

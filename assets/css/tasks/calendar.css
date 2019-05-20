@@ -128,3 +128,11 @@ table.calendar  tbody tr td.hour span {
     display: inline-block;
     vertical-align: middle;
 }
+
+.calendarWrapper .eventWrapper {
+    background-color: grey;
+    position: absolute;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

@@ -1,4 +1,4 @@
-defmodule TimeManger.Utils do
+defmodule TimeManager.Utils do
   @moduledoc false
 
   def get_string_from_day(date) when is_integer(date) do
@@ -22,5 +22,8 @@ defmodule TimeManger.Utils do
     Date.utc_today().day == date.day
   end
 
+  def parse_naive_datetime(date) do
+    NaiveDateTime.from_iso8601!(date <> ":00")
+  end
 
 end

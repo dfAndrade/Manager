@@ -24,7 +24,8 @@ defmodule TimeManagerWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TimeManagerWeb do
-  #   pipe_through :api
-  # end
+   scope "/api", TimeManagerWeb do
+     pipe_through :api
+     get "/", API.TasksController, :index
+   end
 end

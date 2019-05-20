@@ -8,4 +8,9 @@ defmodule TimeManagerWeb.PageView do
       %{text: "Home", to: get_path_caller(conn, path, :index), active: action_name(conn) == :index}
     ]
   end
+
+  def render("scripts.html", _assigns) do
+    ~s{<script>require("web/static/js/posts").Post.run()</script>}
+    |> raw
+  end
 end

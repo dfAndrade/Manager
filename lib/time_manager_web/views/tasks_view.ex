@@ -1,6 +1,6 @@
 defmodule TimeManagerWeb.TasksView do
   use TimeManagerWeb, :view
-  import TimeManger.Utils
+  import TimeManager.Utils
 
   def get_tabs(conn) do
     path = &tasks_path/2
@@ -27,6 +27,12 @@ defmodule TimeManagerWeb.TasksView do
       ]
     end
   end
+
+  def render("scripts.html", _assigns) do
+    ~s{<script>require("web/static/js/posts").Post.run()</script>}
+    |> raw
+  end
+
 
 
 end

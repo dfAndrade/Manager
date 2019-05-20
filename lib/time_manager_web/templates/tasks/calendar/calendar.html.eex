@@ -1,4 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="./js/tasks.js"></script>
+<div class="calendarWrapper" style="position: relative">
 <table class="calendar">
   <thead>
     <tr>
@@ -309,3 +311,4 @@
     </tr>
   </tbody>
 </table>
+</div>

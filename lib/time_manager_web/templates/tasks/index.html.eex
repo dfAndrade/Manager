@@ -1,6 +1,6 @@
 <div class="phx-hero">
     <h2>Tasks!</h2>
-    <%= render TimeManagerWeb.TasksView, "calendar/calendar.html"%>
+    <%= render TimeManagerWeb.TasksView, "calendar/calendar.html",  conn: @conn %>
     <table>
             <thead>
                 <th>Title</th>
