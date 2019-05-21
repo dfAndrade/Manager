@@ -5,8 +5,8 @@ table  {
     width: 100%;
     border-spacing: 0;
     border-collapse: separate;
-    table-layout: fixed;
     margin-bottom: 50px;
+    border-bottom: 1px solid #626E7E;
 }
 table  thead tr th {
     background: #626E7E;

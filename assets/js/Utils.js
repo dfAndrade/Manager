@@ -11,7 +11,15 @@ function getTasksFromPeriod(start, end, callback) {
         type: "get",
         data: {start_date: start, end_date: end},
         success: callback,
-        error: function(data) {console.log(data);}
+        error: function() {
+            $.ajax({
+                url: "http://192.168.1.91:4000/api",
+                type: "get",
+                data: {start_date: start, end_date: end},
+                success: callback,
+                error: function(data) {console.log(data);}
+            })
+        }
     })
 }
 

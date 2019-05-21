@@ -5,48 +5,12 @@ table.calendar  {
     border-collapse: separate;
     table-layout: fixed;
     margin-bottom: 50px;
-    box-sizing: border-box;
-    margin-top: -79px;
-    z-index: 0;
 }
-
-table.calendar .headerShadow {
-    height: 0;
-    position: absolute;
-    box-shadow: 0 2px 15px 4px black;
-    z-index: 1;
-    width: calc(100% - 16px);
-    left: 8px;
-    top: 150px
-}
-
-table.calendar.headerOnly {
-    margin: 0;
-    z-index: 1;
-    position: sticky;
-    top: 0;
-    transition: box-shadow 0.2s ease-in-out;
-}
-
-.calendarWrapper .shadowHidden {
-    clip-path: polygon(-1px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, -1px 100%);
-}
-
-table.calendar.headerOnly.shadow {
-    box-shadow: 0 10px 12px 5px rgba(0,0,0,.6), 0px 0px 0px 0px rgba(0,0,0,.8);
-    transition: box-shadow 0.2s ease-in-out;
-}
-
-table.calendar thead tr {
-    position: relative;
-}
-
 table.calendar  thead tr th {
     background: #626E7E;
     color: #d1d5db;
     padding: 0.5em;
     overflow: hidden;
-    z-index: 2;
 }
 table.calendar  thead tr th:first-child {
     border-radius: 3px 0 0 0;

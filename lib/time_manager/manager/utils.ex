@@ -26,4 +26,13 @@ defmodule TimeManager.Utils do
     NaiveDateTime.from_iso8601!(date <> ":00")
   end
 
+  def parse_int_to_time(int) when is_integer(int) do
+    cond  do
+      int < 10 ->
+        "0#{int}:00"
+      true ->
+        "#{int}:00"
+    end
+  end
+
 end

@@ -69,8 +69,8 @@ defmodule TimeManager.Manager.Task do
       color: task.color,
       priority: task.priority,
       date_completed: task.date_completed,
-      date_start: task.date_start,
-      date_end: task.date_end,
+      start_date: task.date_start,
+      end_date: task.date_end,
     }
   end
 

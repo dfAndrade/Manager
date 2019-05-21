@@ -1,0 +1,37 @@
+<tr>
+   <td class="hour" rowspan="4"><span><%=@hour%></span></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+ </tr>
+ <tr>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+ </tr>
+ <tr>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+ </tr>
+ <tr>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+ </tr>

@@ -2,3 +2,15 @@
 
 @import "ui/ui_main.css";
 @import "tasks/task.css";
+
+img {
+    width: calc(100% - 20px);
+}
+
+body {
+    width: calc(100% - 16px);
+}
+
+.container {
+    text-align: center;
+}

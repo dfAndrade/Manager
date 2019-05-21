@@ -7,18 +7,13 @@ import "./Utils.js"
 import $ from "jquery";
 import calendar from "./tasks/calendar.js"
 
-function init(cb) { // To make this create global $
-    $(function () {                // to make $ have access to built dom
-        if (window.up === undefined) {
-            window.$ = $;
-            window.up = true;
-        }
-        calendar();
-    });
-}
-init();
-
-
+$(function () {                // to make $ have access to built dom
+    if (window.up === undefined) {
+        window.$ = $;
+        window.up = true;
+    }
+    calendar();
+});
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
 // in "webpack.config.js".
