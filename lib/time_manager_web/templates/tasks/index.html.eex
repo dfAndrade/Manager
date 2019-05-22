@@ -1,30 +1,33 @@
+<script type="text/javascript" src="<%= static_path(@conn, "/js/calendar.js") %>"></script>
+<link rel="stylesheet" href="<%= static_path(@conn, "/css/calendar.css") %>"/>
 <div class="phx-hero">
     <h2>Tasks!</h2>
     <%= render TimeManagerWeb.TasksView, "calendar/calendar.html",  conn: @conn %>
+
     <table>
-            <thead>
-                <th>Title</th>
-                <th>Priority</th>
-                <th>Date Start</th>
-                <th>Date End</th>
-                <th>Date Completed</th>
-            </thead>
-            <tbody>
-            <%= for task <- @tasks do %>
-            <tr>
-                <td>
-                    <div class="square" style="background-color: <%=task.color%>"></div><div class="task_title"><%=task.title%></div>
-                </td>
-                <td><%=task.priority%></td>
-                <td><%=task.date_start%></td>
-                <td><%=task.date_end%></td>
-                <td><%=task.date_completed%></td>
-            </tr>
-            <% end %>
-                <tr></tr>
-            </tbody>
-        </table>
-        <%= button("New Post", method: "get", to: tasks_path(@conn, :new), class: "btn btn-sm btn-info") %>
+        <thead>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Date Start</th>
+            <th>Date End</th>
+            <th>Date Completed</th>
+        </thead>
+        <tbody>
+        <%= for task <- @tasks do %>
+        <tr>
+            <td>
+                <div class="square" style="background-color: <%=task.color%>"></div><div class="task_title"><%=task.title%></div>
+            </td>
+            <td><%=task.priority%></td>
+            <td><%=task.date_start%></td>
+            <td><%=task.date_end%></td>
+            <td><%=task.date_completed%></td>
+        </tr>
+        <% end %>
+            <tr></tr>
+        </tbody>
+    </table>
+    <%= button("New Post", method: "get", to: tasks_path(@conn, :new), class: "btn btn-sm btn-info") %>
 
 
 </div>

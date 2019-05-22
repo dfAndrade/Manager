@@ -1,7 +1,7 @@
 /* This file is for your main application css. */
 
 @import "ui/ui_main.css";
-@import "tasks/task.css";
+/*@import "tasks/task.css";*/
 
 img {
     width: calc(100% - 20px);

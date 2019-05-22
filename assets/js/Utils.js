@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export var Utils = {
     getTasksFromPeriod: getTasksFromPeriod,
     getWeekFromDay: getWeekFromDay
@@ -7,18 +9,12 @@ export var Utils = {
 // Output: Json Array
 function getTasksFromPeriod(start, end, callback) {
     $.ajax({
-        url: "http://localhost:4000/api",
+        url: window.location.origin + "/api",
         type: "get",
         data: {start_date: start, end_date: end},
         success: callback,
-        error: function() {
-            $.ajax({
-                url: "http://192.168.1.91:4000/api",
-                type: "get",
-                data: {start_date: start, end_date: end},
-                success: callback,
-                error: function(data) {console.log(data);}
-            })
+        error: function(data) {
+            console.log("Error: " + data);
         }
     })
 }

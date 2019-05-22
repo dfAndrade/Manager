@@ -4,16 +4,17 @@
 import css from "../css/app.css"
 
 import "./Utils.js"
-import $ from "jquery";
-import calendar from "./tasks/calendar.js"
+// import $ from "jquery";
 
-$(function () {                // to make $ have access to built dom
-    if (window.up === undefined) {
-        window.$ = $;
-        window.up = true;
-    }
-    calendar();
-});
+const $ = require("jquery");
+// import calendar from "./tasks/calendar.js"
+
+if (window.up === undefined) {
+    window.$ = $;
+    window.jQuery = $;
+    window.up = true;
+    console.log("up");
+}
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
 // in "webpack.config.js".

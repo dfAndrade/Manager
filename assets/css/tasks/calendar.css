@@ -119,6 +119,11 @@ table.calendar  tbody tr td.hour span {
         transform: rotate(270deg);
         -webkit-transform: rotate(270deg);
         -moz-transform: rotate(270deg);
+        font-size: 100%;
+    }
+
+    body .calendarWrapper .eventWrapper::before {
+        font-size: 65%;
     }
 }
 @media (max-width: 27em) {
@@ -172,4 +177,15 @@ table.calendar  tbody tr td.hour span {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+}
+.calendarWrapper .eventWrapper::before {
+    content: attr(display_text);
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2vw;
+    text-align: left;
+    float: left;
+    padding-left: 15%;
+    padding-top: 6%;
+    color: white;
 }

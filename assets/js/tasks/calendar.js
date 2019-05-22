@@ -1,4 +1,7 @@
 import {Utils} from "../Utils.js";
+import css from "../../css/tasks/calendar.css"
+import $ from 'jquery';
+
 
 class Calendar {
     constructor() {
@@ -8,16 +11,23 @@ class Calendar {
     }
 }
 
-export default function init() {
-    linkCalendarClick();
-    loadWeekTasks();
-    lockTableHeaderShadow();
-};
+function init() {
+    $(function () {
+        if ($(".calendar").length === 0) return;
+        linkCalendarClick();
+        loadWeekTasks();
+        lockTableHeaderShadow();
+    });
+}
 
-function placeEventDiv(offsetBoxCallBack, color, customClass) {
+init();
+
+function placeEventDiv(offsetBoxCallBack, color, customClass, content) {
 
     // [x, y, width, height], color
     var offsetBox = offsetBoxCallBack();
+
+    console.log(offsetBox);
 
     var new_event = $("<div class='eventWrapper " + (customClass!== undefined ? customClass: "") + "'></div>").css({
         left: offsetBox[0],
@@ -28,6 +38,10 @@ function placeEventDiv(offsetBoxCallBack, color, customClass) {
 
     if (color) {
         new_event.css("background", color);
+    }
+
+    if (content) {
+        new_event.attr("display_text", content);
     }
 
     $(".shadowHidden").append(new_event);
@@ -51,14 +65,21 @@ function placeEventDiv(offsetBoxCallBack, color, customClass) {
 function getOffSet(parent) {
     var calendar = $(".calendar:not(.headerOnly)");
 
-    var width = $(".calendar td:not(.hour)")[0].offsetWidth; // reference same div to fix
-    var height = parent[0].offsetHeight * 4;                 // align issues
+    var td = $(".calendar td:not(.hour)");
 
-    var pIdx = parent.parent().index();
-    var day = (pIdx)%4===0 ? parent.index()-1 : parent.index();
+    var width = td[0].offsetWidth;        // reference same div to fix
+    var tdHeight = td[0].offsetHeight;    // align issues
 
-    var relX = ++day * width;
-    var relY = parent.offset().top - calendar.offset().top;
+    console.log("w: " + width + " h: " + tdHeight);
+
+
+    var coords = getCoordsFromTd(parent);
+    var height = (tdHeight * 4) + 1;
+
+    var borderOffset = Math.floor(coords[1] / 4);
+
+    var relX = coords[0] * width;
+    var relY = (coords[1] * tdHeight) + calendar.find("thead")[0].offsetHeight + borderOffset;
 
     return {top: relY, left: relX, width: width, height: height};
 }
@@ -70,7 +91,6 @@ function getBoxFromTask(task) {
 
     var divHeight = td[0].offsetHeight;
     var divWidth = td[0].offsetWidth;
-    console.log("TASK width: " + divWidth);
 
     var dateStart = new Date(Date.parse(task.start_date));
     var dateEnd = new Date(Date.parse(task.end_date));
@@ -81,9 +101,9 @@ function getBoxFromTask(task) {
     var y = (minutes / 15 * divHeight) + $(".calendar thead")[0].offsetHeight;
     var span = (dateEnd - dateStart)  / 1000 / 60 / 15;
 
-    //
+
     // noinspection JSSuspiciousNameCombination
-    return [Math.round(x), Math.round(y), Math.round(divWidth * .9), Math.round(span * divHeight)];
+    return [Math.floor(x), Math.floor(y), Math.floor(divWidth * .9), Math.floor(span * divHeight)];
 }
 
 function loadWeekTasks() {
@@ -120,8 +140,7 @@ function linkCalendarClick() {
         placeEventDiv(function () {
             var res = getOffSet(td);
             return [res.left, res.top, Math.round(res.width * .9), res.height];
-        },null, "temp");
-
+        },null, "temp", "+ New event");
     };
 
     $(".calendar").data("calendar", new Calendar());
@@ -143,9 +162,17 @@ function lockTableHeaderShadow() {
     };
 
     var bar = $(".calendar.headerOnly");
+    var table = $(".calendar:not(.headerOnly)");
+    table.css("marginTop", -table.find("thead")[0].offsetHeight);
     $(window).on('resize scroll', update(bar));
     $(window).trigger("resize");
 }
+
+function getCoordsFromTd(td) {
+    var pIdx = td.parent().index();
+    var day = (pIdx)%4===0 ? td.index()-1 : td.index();
+    return [++day, pIdx];
+};
 
 var getTdFromCoords = function (x, y) {
 
@@ -166,39 +193,3 @@ var getTdFromCoords = function (x, y) {
     var row = $($(".calendar tr")[cords[1]]); // 4 row
     return $(row.find("td")[cords[0]]);     // 3 col
 };
-
-// function placeTaskDiv(task) {
-//     var coords = getBoxFromTask(task);
-//
-//
-//     // [x, y, width, height], color
-//     var new_event = $("<div class='eventWrapper'></div>").css({
-//         left: coords[0],
-//         top: coords[1],
-//         width: coords[2],
-//         height: coords[3],
-//     });
-//
-//     if (task.color) {
-//         new_event.css("background", task.color);
-//     }
-//
-//     $(".calendarWrapper").append(new_event);
-//
-//     // Function to resize taskBox with window resize
-//     var resizeUpdate = function() {
-//         var coords = getBoxFromTask(task);
-//
-//         new_event.css({
-//             left: coords[0],
-//             top: coords[1],
-//             width: coords[2],
-//             height: coords[3]
-//         });
-//         if (task.color) {
-//             new_event.css("background", task.color);
-//         }
-//     };
-//
-//     $(window).resize(resizeUpdate);
-// }
