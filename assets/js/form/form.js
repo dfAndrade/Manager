@@ -1,5 +1,6 @@
-import $ from "../App.js";
+import $ from "jquery";
 
+import "../../css/form/form.css"
 
 export default function init() {
     $(function () {
@@ -10,5 +11,4 @@ export default function init() {
 init();
 
 function attachDateTimePicker() {
-    $("")
 }

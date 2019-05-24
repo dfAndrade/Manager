@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<%= static_path(@conn, "/css/form.css")%>"/>
 <%= form_for @changeset, @action, [as: :post], fn f-> %>
 
     <div class="form-group">
@@ -25,10 +26,13 @@
         <span class="text-danger"><%= error_tag f, :temp_date_end %></span>
     </div>
 
-    <%= render TimeManagerWeb.LayoutView, "form/datetime_picker.html",
+    <%=# render TimeManagerWeb.LayoutView, "form/datetime_picker.html",
+       # conn: @conn,
+       # f: f
+    %>
+
+    <%= render TimeManagerWeb.LayoutView, "form/android_datetime_picker.html",
         conn: @conn,
-        action: tasks_path(@conn, :create),
-        changeset: @changeset,
         f: f
     %>
 

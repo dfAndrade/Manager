@@ -182,10 +182,11 @@ table.calendar  tbody tr td.hour span {
     content: attr(display_text);
     font-family: Arial, sans-serif;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 1.3vw;
     text-align: left;
     float: left;
     padding-left: 15%;
     padding-top: 6%;
+    padding-right: 15%;
     color: white;
 }

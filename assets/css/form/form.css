@@ -1,0 +1,42 @@
+
+.startWrapper {
+    width: fit-content;
+    display: inline-block;
+}
+
+.endWrapper {
+    width: fit-content;
+    display: inline-block;
+}
+
+.separator {
+    width: fit-content;
+    display: inline-block;
+}
+
+
+
+.inputWrapper {
+    padding: 5px 10px;
+    background: #d3d3d3;
+    display: inline-block;
+    border-radius: 6px;
+}
+
+.inputWrapper input[type="text"] {
+    border: none;
+    -webkit-box-shadow: 0 0 0 1000px #d3d3d3 inset !important;
+}
+
+.inputWrapper input[type="text"]:focus {
+    outline: none;
+}
+
+
+.inputWrapper input[type="text"].time {
+    width: 35px;
+}
+
+.inputWrapper input[type="text"].date {
+    width: 78px;
+}

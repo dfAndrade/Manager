@@ -1,0 +1,25 @@
+<div class=".androidDateTimePickerWrapper">
+<div class=".androidDateTimePicker">
+
+    <div class="startWrapper">
+        <div class="inputWrapper">
+            <%= text_input @f, :date_start, placeholder: "", class: "form-control date" %>
+        </div>
+        <div class="inputWrapper">
+            <%= text_input @f, :time_start, placeholder: "", class: "form-control time" %>
+        </div>
+    </div>
+
+    <div class="separator">-</div>
+
+    <div class="endWrapper">
+        <div class="inputWrapper">
+            <%= text_input @f, :date_end, placeholder: "", class: "form-control time" %>
+        </div>
+        <div class="inputWrapper">
+            <%= text_input @f, :time_end, placeholder: "", class: "form-control date" %>
+        </div>
+    </div>
+
+</div>
+</div>

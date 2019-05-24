@@ -145,6 +145,10 @@ function linkCalendarClick() {
 
     $(".calendar").data("calendar", new Calendar());
 
+    $(".calendar").on("click_b", function () {
+        console.log("thsi");
+    });
+
     $(".calendar td:not(.hour)").on("click", null, clickOnTd);
 }
 

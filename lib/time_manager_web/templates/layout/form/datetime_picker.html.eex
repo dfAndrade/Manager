@@ -1,6 +1,8 @@
 <div class="form-group date_time">
-    <%= text_input @f, :date_start, placeholder: "", class: "form-control clockpicker" %>
+    <%= text_input @f, :date_start, placeholder: "", class: "form-control clockPicker" %>
     <span class="text-danger"><%= error_tag @f, :title %></span>
     <link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css"/>
     <script type="text/javascript" src="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <script type="text/javascript" src="<%= static_path(@conn, "/js/form.js") %>"></script>
+    <script>$(".clockPicker").clockpicker();</script>
 </div>
