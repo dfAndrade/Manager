@@ -27,12 +27,38 @@ defmodule TimeManager.Utils do
   end
 
   def parse_int_to_time(int) when is_integer(int) do
-    cond  do
-      int < 10 ->
-        "0#{int}:00"
-      true ->
-        "#{int}:00"
-    end
+    if (int < 10), do: "0#{int}:00", else: "#{int}:00"
+  end
+
+  def pad_value(input, pad) when is_integer(input) and is_integer(pad) do
+    IO.inspect(input, label: "ternary")
+    if (input < :math.pow(10, pad)), do: String.duplicate("0", pad  - length(Integer.digits(input))) <> "#{input}", else: "#{input}"
+  end
+
+  def pad_value(input, pad) when is_integer(pad) do
+    {input, _} = Integer.parse(input)
+    IO.inspect(input, label: "input")
+    pad_value(input, pad)
+  end
+
+  def parse_map_to_naive_datetime_str(%{} = map) do
+    IO.inspect(map)
+    date = Enum.join(
+      [
+        pad_value(map["year"], 3),
+        pad_value(map["month"], 2),
+        pad_value(map["day"], 2)
+      ],
+      "/"
+    )
+    time = Enum.join(
+      [
+        pad_value(map["hour"], 2),
+        pad_value(map["minute"], 2)
+      ],
+      ":"
+    )
+    date <> " " <> time
   end
 
 end

@@ -2,7 +2,7 @@
 <%= form_for @changeset, @action, [as: :post], fn f-> %>
 
     <div class="form-group">
-        <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+        <%= text_input f, :title, placeholder: (if @conn.params["title"] == nil, do: "Title", else: @conn.params["title"]), class: "form-control" %>
         <span class="text-danger"><%= error_tag f, :title %></span>
     </div>
 
@@ -12,7 +12,22 @@
     </div>
 
     <div class="form-group">
-        <%= datetime_local_input f, :temp_date_start, class: "form-control " %>
+        <% test = {
+            {
+                2019,
+                6,
+                1
+            }, {
+                1,
+                0,
+                0
+            }
+        }
+
+
+
+        %>
+        <%= datetime_select f, :temp_date_start, default: test, class: "form-control " %>
         <span class="text-danger"><%= error_tag f, :temp_date_start %></span>
     </div>
 
@@ -22,7 +37,7 @@
     </div>
 
     <div class="form-group">
-        <%= time_select f, :temp_date_end, class: "form-control " %>
+        <%= datetime_local_input f, :temp_date_end, class: "form-control " %>
         <span class="text-danger"><%= error_tag f, :temp_date_end %></span>
     </div>
 
@@ -31,9 +46,9 @@
        # f: f
     %>
 
-    <%= render TimeManagerWeb.LayoutView, "form/android_datetime_picker.html",
-        conn: @conn,
-        f: f
+    <%= #render TimeManagerWeb.LayoutView, "form/android_datetime_picker.html",
+        #conn: @conn,
+        #f: f
     %>
 
     <div class="form-group">

@@ -1,5 +1,4 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="./js/tasks.js"></script>
 <div class="calendarWrapper" style="position: relative">
 <div class="shadowHidden">
     <table class="calendar headerOnly">
@@ -25,10 +24,18 @@
     </tr>
   </thead>
   <tbody>
-    <%=for hour <- 1..24 do %>
+    <%=for hour <- 0..23 do %>
     <%=render @view_module, "calendar/calendar_row.html", hour: parse_int_to_time(hour) %>
     <%end%>
   </tbody>
 </table>
+    <script>
+        $(document).on("click", ".eventWrapper.temp", function() {
+            let ev = $(this);
+            window.location = "<%= tasks_path(@conn, :new) %>" + "/?" +
+             "start_date=" + ev.attr("start_date") + "&" +
+             "end_date=" + ev.attr("end_date");
+        })
+    </script>
 </div>
 </div>

@@ -13,7 +13,6 @@ if (window.up === undefined) {
     window.$ = $;
     window.jQuery = $;
     window.up = true;
-    console.log("up");
 }
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured

@@ -16,7 +16,7 @@ defmodule TimeManager.Manager.Task do
     field :date_start, :naive_datetime
     field :date_end, :naive_datetime
 
-    field :temp_date_start, :string, virtual: true
+    field :temp_date_start, :map, virtual: true
     field :temp_date_end, :string, virtual: true
     timestamps()
   end
@@ -33,8 +33,16 @@ defmodule TimeManager.Manager.Task do
     |> init_color()
   end
 
+
+  # start date is an erl map
+  defp parse_date(changeset = %Ecto.Changeset{changes: %{:temp_date_start => %{} = map_start}}) do
+    changeset = put_change(changeset, :temp_date_start, parse_map_to_naive_datetime_str(map_start))
+    parse_date(changeset)
+  end
+
   # Creates task with default one hour duration
   defp parse_date(changeset) do
+    IO.inspect(changeset)
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{:temp_date_start => date_start} = changes} ->
         formatted_date_start = parse_naive_datetime(date_start)
