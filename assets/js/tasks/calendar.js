@@ -2,6 +2,7 @@
 import {Utils} from "../Utils.js"
 import css from "../../css/tasks/calendar.css";
 import {TaskEditor} from "./TaskEditor.js"
+require('webpack-jquery-ui/draggable');
 
 
 export class Calendar {
@@ -41,7 +42,7 @@ export class Calendar {
 
             console.log("weekstart b4 ", self.weekStart.format());
 
-            let startDate = self.weekStart.addDays(test[0] + 1).addMinutes(test[1] * 15);
+            let startDate = self.weekStart.addDays(test[0]).addMinutes(test[1] * 15);
             let endDate = startDate.addMinutes(90);
             console.log("weekstart", self.weekStart.format());
             console.log("added days", test[0] + 1);
@@ -97,6 +98,16 @@ export class Calendar {
             self.form.title = "Edit Task";
             self.form.show(function () {
                 self.form.triggerOnChange();
+                let position = ev.offset();
+                position.left += ev.width() + 10;
+
+                // TODO implement make draggable(startingPos) on Popup
+
+                self.form.popupDiv.draggable();
+                self.form.popupDiv.offset(position);
+                // self.form.popupDiv.position({
+                //     of: $(window)
+                // });
             });
         });
 

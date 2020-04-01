@@ -9,6 +9,20 @@
     z-index: 22;
 }
 
+
+.popupWrapper .popup:not(.large).ui-draggable {
+    position: absolute;
+
+    left: unset;
+    top: unset;
+
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+
 .popupWrapper .popup:not(.large) {
     /*display: none;*/
     /*background: white;*/
@@ -127,6 +141,7 @@
 }
 
 .overlay {
+    opacity: 0;
     position: absolute;
     background: rgba(0, 32, 48, 0.6);
     z-index: 21;
