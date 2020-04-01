@@ -17,10 +17,13 @@ defmodule TimeManagerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/tasks", TasksController, :index
-    get "/tasks/new", TasksController, :new
-    get "/tasks/:task_id", TasksController, :show
-    post "/tasks", TasksController, :create
+    resources "/tasks", TasksController
+#    get "/tasks", TasksController, :index
+#    get "/tasks/new", TasksController, :new
+#    get "/tasks/temp", TasksController, :temp
+#    get "/tasks/:task_id", TasksController, :show
+#    post "/tasks", TasksController, :create
+
   end
 
   # Other scopes may use custom stacks.

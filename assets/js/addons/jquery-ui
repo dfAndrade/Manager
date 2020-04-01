@@ -1,0 +1,4 @@
+require("webpack-jquery-ui/css");
+import css from "../../css/ui/addons/jquery-ui.css"
+
+export default {};

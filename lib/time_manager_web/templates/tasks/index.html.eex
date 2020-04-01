@@ -27,7 +27,7 @@
             <tr></tr>
         </tbody>
     </table>
-    <%= link("New Post", method: "get", to: tasks_path(@conn, :new), class: "btn btn-sm btn-info") %>
+
 
 
 </div>

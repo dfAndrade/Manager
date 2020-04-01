@@ -16,7 +16,7 @@ defmodule TimeManager.Manager.Task do
     field :date_start, :naive_datetime
     field :date_end, :naive_datetime
 
-    field :temp_date_start, :map, virtual: true
+    field :temp_date_start, :string, virtual: true
     field :temp_date_end, :string, virtual: true
     timestamps()
   end

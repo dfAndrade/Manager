@@ -3,6 +3,8 @@ defmodule TimeManagerWeb.TasksController do
 
   alias TimeManager.Manager.Task
 
+  import TimeManagerWeb.Utils
+
   def index(conn, _params) do
     tasks = Task.get_all()
     render(conn, "index.html", tasks: tasks)
@@ -10,7 +12,13 @@ defmodule TimeManagerWeb.TasksController do
 
   def new(conn, _) do
     changeset = Task.changeset(%Task{}, %{})
-    render(conn, "new.html", changeset: changeset)
+    conn
+    |> put_layout(false)
+    |> set_default("startDate", "")
+    |> set_default("endDate", "")
+    |> set_default("startTime", "")
+    |> set_default("endTime", "")
+    |> render("new.html", changeset: changeset)
   end
 
   def show(conn, %{"task_id" => id}) do
@@ -25,6 +33,15 @@ defmodule TimeManagerWeb.TasksController do
     else
       {:error, changeset} ->
         render(conn, "new.html", changeset: %{changeset | action: :new})
+    end
+  end
+
+  def temp(conn, params) do
+    with {:ok, _task} <- Task.add(params) do
+      redirect(conn, to: tasks_path(conn, :index))
+    else
+      {:error, changeset} ->
+        render(conn, "form/temp.html", changeset: %{changeset | action: :new})
     end
   end
 end

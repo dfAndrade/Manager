@@ -1,0 +1,171 @@
+.popupWrapper {
+    display: none;
+}
+
+.popupWrapper .popup {
+    background: white;
+    position: absolute;
+    color: black;
+    z-index: 22;
+}
+
+.popupWrapper .popup:not(.large) {
+    /*display: none;*/
+    /*background: white;*/
+    /*position: absolute;*/
+    left: 50%;
+    width: 40%;
+    min-width: 696px;
+    top: calc(50% + 28px);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    /*border: 1px solid #77a3dd;*/
+    /*color: black;*/
+    /*z-index: 22;*/
+}
+
+.popupWrapper .popup.large {
+    left: 16px;
+    top: 16px;
+    right: 16px;
+    bottom: 16px;
+}
+
+.popupWrapper .popup:focus {
+    outline: none;
+}
+
+.popupWrapper .popup .topBlueBar {
+    height: 32px;
+    color: white;
+    line-height: 32px;
+    padding-left: 16px;
+    font-size: 14px;
+    background-color: #77a3dd
+}
+
+.popupWrapper .popup form {
+    padding: 16px 16px 0 16px;
+}
+
+.popupWrapper .popup form .description {
+    font-family: 'Chivo-Bold', serif;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #002030;
+    margin: 0 0 10px;
+}
+
+.popupWrapper .popup form input[type="text"],
+.popupWrapper .popup form input[type="number"]
+{
+    display: block;
+    -webkit-appearance: none;
+    border: 0;
+    border-bottom: 1px solid #77a3dd;
+    width: 100%;
+    font-size: 20px;
+    outline: none;
+    margin-top: 10px;
+    font-family: 'Chivo-Light', serif;
+}
+
+.popupWrapper .popup form label {
+    font-family: 'Chivo-Light', serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.popupWrapper .popup .actions {
+    text-align: right;
+    padding: 16px;
+}
+
+.popupWrapper .popup .actions input {
+    margin-left: 5px;
+}
+
+.popupWrapper .popup form select {
+    width: 100%;
+    height: 32px;
+}
+
+.popupWrapper .popup form .folderTreeDropDown {
+    width: 100%;
+}
+
+.popupWrapper .popup form .folderTreeButton {
+    width: calc(100% - 18px);
+    max-width: none;
+    margin-right: 0;
+    border: 1px solid #77a3dd;
+    height: 30px;
+}
+
+.popupWrapper .popup form .columnFull {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+}
+
+.popupWrapper .popup form .column {
+    display: inline-block;
+    width: calc(50% - 8px);
+    vertical-align: top;
+}
+
+.popupWrapper .popup form .group {
+    margin-bottom: 10px;
+}
+
+.popupWrapper .popup form .column:nth-of-type(even) {
+    margin-left: 16px;
+}
+
+.overlay {
+    position: absolute;
+    background: rgba(0, 32, 48, 0.6);
+    z-index: 21;
+    width: 100%;
+    top: -56px;
+    bottom: 0;
+}
+
+.popupWrapper input.hasError{
+    border:1px solid #ee8070 !important;
+}
+
+.popupWrapper .popup.large{
+}
+
+.popupWrapper .popup.large .topBlueBar{
+    height: 56px;
+}
+
+.popupWrapper .popup.large .topBlueBar .title{
+    font-family: Chivo, Helvetica, sans-serif;
+    padding-top: 18px;
+    font-size: 18px;
+    line-height: 20px;
+    color:white;
+    text-transform: uppercase;
+}
+
+.popupWrapper .popup.large .topBlueBar .close {
+    background-image: url(/monitor/img/addui/closeB.svg);
+    height: 32px;
+    width: 32px;
+    background-size: 32px 32px;
+    right: 12px;
+    top: 12px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.popupWrapper .popup.large .topBlueBar .close:active {
+    background-image: url(/monitor/img/addui/closeB.on.svg);
+}

@@ -30,12 +30,7 @@
   </tbody>
 </table>
     <script>
-        $(document).on("click", ".eventWrapper.temp", function() {
-            let ev = $(this);
-            window.location = "<%= tasks_path(@conn, :new) %>" + "/?" +
-             "start_date=" + ev.attr("start_date") + "&" +
-             "end_date=" + ev.attr("end_date");
-        })
+        
     </script>
 </div>
 </div>

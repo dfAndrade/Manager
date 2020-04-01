@@ -1,15 +1,22 @@
-import {Utils} from "../Utils.js";
-import css from "../../css/tasks/calendar.css"
-import $ from 'jquery';
+// import {Utils} from "../Utils.js";
+import {Utils} from "../Utils.js"
+import css from "../../css/tasks/calendar.css";
+import {TaskEditor} from "./TaskEditor.js"
 
 
-class Calendar {
+export class Calendar {
     constructor() {
         this.today = new Date();
         let weekFromDay = Utils.getWeekFromDay(this.today);
-        console.log("constructor");
         console.log(weekFromDay);
         this.weekStart = weekFromDay[0];
+
+
+
+        this.form = new TaskEditor($("body"), "editTask");
+        this.form.addActionButton("submit", null, null, function(form) {
+            console.log(this.values);
+        })
     }
 
     linkCalendarClick() {
@@ -32,10 +39,22 @@ class Calendar {
                 return [res.left, res.top, Math.round(res.width * .9), res.height];
             }, null, "temp", "+ New event");
 
-            let startDate = self.weekStart.addDays(test[0] + 1).addMinutes(test[1] * 15);
+            console.log("weekstart b4 ", self.weekStart.format());
 
-            newEvent.attr("start_date", startDate.format()); // TODO figure how to get the dates here
-            newEvent.attr("end_date", startDate.addMinutes(90).format()); // TODO figure how to get the dates here
+            let startDate = self.weekStart.addDays(test[0] + 1).addMinutes(test[1] * 15);
+            let endDate = startDate.addMinutes(90);
+            console.log("weekstart", self.weekStart.format());
+            console.log("added days", test[0] + 1);
+            console.log("added minutes", test[1] * 15);
+            console.log("startDate", startDate.format());
+            console.log("startTime", startDate.format("time"));
+
+
+            newEvent.attr("start_date", startDate.format("date")); // TODO figure how to get the dates here
+            newEvent.attr("end_date", endDate.format("date")); // TODO figure how to get the dates here
+
+            newEvent.attr("start_time", startDate.format("time"));
+            newEvent.attr("end_time", endDate.format("time"));
             // TODO or if it would be easier to do it in "placeEventDiv"
         }
 
@@ -45,6 +64,7 @@ class Calendar {
     }
 
     placeEventDiv(offsetBoxCallBack, color, customClass, content) {
+        let self = this;
 
         // [x, y, width, height], color
         let offsetBox = offsetBoxCallBack();
@@ -64,6 +84,21 @@ class Calendar {
         if (content) {
             new_event.attr("display_text", content);
         }
+
+        new_event.on("click", function() {
+            let ev = $(this);
+            let params = {
+                startTime: ev.attr("start_time"),
+                endTime: ev.attr("end_time"),
+                startDate: ev.attr("start_date"),
+                endDate: ev.attr("end_date"),
+            };
+            self.form.setupWithURL(window.location.href + "/new/", params);
+            self.form.title = "Edit Task";
+            self.form.show(function () {
+                self.form.triggerOnChange();
+            });
+        });
 
         $(".shadowHidden").append(new_event);
 
@@ -102,7 +137,7 @@ class Calendar {
 
         let date = new Date();
         let week = Utils.getWeekFromDay(date);
-        Utils.getTasksFromPeriod(week[0].format(), week[1].format(), placeTasks);
+        Utils.getTasksFromPeriod(week[0].format("iso8601"), week[1].format("iso8601"), placeTasks);
     }
 
     // Return the offset to place taskBox
@@ -118,8 +153,6 @@ class Calendar {
 
         let relX = coords[0];
         let relY = coords[1];
-
-        self.weekStart.addDays();
 
 
         return {top: relY, left: relX, width: width, height: height};
@@ -189,14 +222,12 @@ function init() {
     });
 }
 
-init();
-
 function lockTableHeaderShadow() {
     function update(bar) {
         return function () {
-            let y = bar[0].getBoundingClientRect().top;
+            let y = bar.position().top;
 
-            if (y <= 0) {
+            if (y > 0) {
                 bar.addClass("shadow");
             } else {
                 bar.removeClass("shadow");
@@ -207,6 +238,8 @@ function lockTableHeaderShadow() {
     let bar = $(".calendar.headerOnly");
     let table = $(".calendar:not(.headerOnly)");
     table.css("marginTop", -table.find("thead")[0].offsetHeight);
-    $(window).on('resize scroll', update(bar));
+    $(".container.mainWrapper").on('resize scroll', update(bar));
     $(window).trigger("resize");
 }
+
+init();

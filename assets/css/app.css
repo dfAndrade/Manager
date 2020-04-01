@@ -1,14 +1,23 @@
 /* This file is for your main application css. */
 
 @import "ui/ui_main.css";
-/*@import "tasks/task.css";*/
+/*@import "./phoenix.css";*/
 
 img {
-    width: calc(100% - 20px);
+    /*width: calc(100% - 20px);*/
 }
 
 body {
     width: calc(100% - 16px);
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh);
+}
+
+.mainWrapper {
+    position: relative;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .container {

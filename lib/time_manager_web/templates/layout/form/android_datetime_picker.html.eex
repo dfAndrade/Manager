@@ -3,10 +3,14 @@
 
     <div class="startWrapper">
         <div class="inputWrapper">
-            <%= text_input @f, :date_start, placeholder: "", class: "form-control date" %>
+            <label>
+                <input type="text" class="date start">
+            </label>
         </div>
         <div class="inputWrapper">
-            <%= text_input @f, :time_start, placeholder: "", class: "form-control time" %>
+            <label>
+                <input type="text" class="time start">
+            </label>
         </div>
     </div>
 

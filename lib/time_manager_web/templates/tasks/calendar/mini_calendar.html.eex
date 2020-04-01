@@ -1,0 +1,11 @@
+<div class="miniCalendar">
+    <div class="">
+        <table>
+            <thead>
+                <%= for n <- ["S", "T", "Q", "Q", "S", "S", "D"] do %>
+                    <th><%= n %></th>
+                <% end %>
+            </thead>
+        </table>
+    </div>
+</div>

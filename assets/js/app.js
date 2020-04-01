@@ -2,18 +2,11 @@
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 import css from "../css/app.css"
-
-import "./Utils.js"
+// import "./Utils.js"
 // import $ from "jquery";
-
-const $ = require("jquery");
 // import calendar from "./tasks/calendar.js"
 
-if (window.up === undefined) {
-    window.$ = $;
-    window.jQuery = $;
-    window.up = true;
-}
+
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
 // in "webpack.config.js".
