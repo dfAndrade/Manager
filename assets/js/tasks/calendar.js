@@ -1,7 +1,10 @@
 // import {Utils} from "../Utils.js";
 import {Utils} from "../Utils.js"
-import css from "../../css/tasks/calendar.css";
+import "../../css/tasks/calendar.css";
+import "../../css/tasks/task_element.css";
 import {TaskEditor} from "./TaskEditor.js"
+import {Task} from "./task";
+import {CalendarUtils} from "./CalendarUtils";
 require('webpack-jquery-ui/draggable');
 
 
@@ -9,9 +12,8 @@ export class Calendar {
     constructor() {
         this.today = new Date();
         let weekFromDay = Utils.getWeekFromDay(this.today);
-        console.log(weekFromDay);
         this.weekStart = weekFromDay[0];
-
+        this.newTask = null;
 
 
         this.form = new TaskEditor($("body"), "editTask");
@@ -24,44 +26,67 @@ export class Calendar {
         let self = this;
 
         function clickOnTd() {
-            // For now only set new tasks on even 15min blocks
 
-            let wrapper = $(".eventWrapper.temp");
-            if (wrapper.length) {
-                wrapper.remove();
-                return;
+            if (self.newTask !== null) {
+                self.newTask.remove();
             }
 
             let td = $(this);
-            let test = Calendar.getCoordsFromTd(td);
+            let newDiv = self._createNewTaskDiv(td);
 
-            let newEvent = self.placeEventDiv(function () {
-                let res = self.getOffSet(td);
-                return [res.left, res.top, Math.round(res.width * .9), res.height];
-            }, null, "temp", "+ New event");
+            newDiv.place();
 
-            console.log("weekstart b4 ", self.weekStart.format());
+            newDiv.onCLick = function () {
+                let params = {
+                    startDate: this.startDate.format("date"),
+                    endDate: this.endDate.format("date"),
+                    startTime: this.startDate.format("time"),
+                    endTime: this.endDate.format("time"),
+                };
 
-            let startDate = self.weekStart.addDays(test[0]).addMinutes(test[1] * 15);
-            let endDate = startDate.addMinutes(90);
-            console.log("weekstart", self.weekStart.format());
-            console.log("added days", test[0] + 1);
-            console.log("added minutes", test[1] * 15);
-            console.log("startDate", startDate.format());
-            console.log("startTime", startDate.format("time"));
+                console.log(params);
+                if (!self.form.isHidden()) {
+                    return;
+                }
+                self.form.setupWithURL(window.location.href + "/new/", params);
+                self.form.title = "Edit Task";
 
+                self.form.show(function () {
+                    self.form.triggerOnChange();
+                    let position = newDiv._wrapper.offset();
+                    position.left += newDiv._wrapper.width() + 10;
 
-            newEvent.attr("start_date", startDate.format("date")); // TODO figure how to get the dates here
-            newEvent.attr("end_date", endDate.format("date")); // TODO figure how to get the dates here
+                    // TODO implement make draggable(startingPos) on Popup
 
-            newEvent.attr("start_time", startDate.format("time"));
-            newEvent.attr("end_time", endDate.format("time"));
-            // TODO or if it would be easier to do it in "placeEventDiv"
+                    self.form.popupDiv.draggable();
+                    self.form.popupDiv.offset(position);
+                });
+            };
+
+            self.newTask = newDiv;
+
         }
 
         $(".calendar td:not(.hour)").on("click", null, clickOnTd);
+    }
 
+    _createNewTaskDiv(td) {
+        let self = this;
+        let coords = CalendarUtils.getCoordsFromTd(td);
 
+        let date = self.weekStart.addDays(coords.x);
+        let hours = Math.floor(coords.y * 15 / 60);
+        let minutes = (coords.y * 15) % 60;
+        date.setHours(hours);
+        date.setMinutes(minutes);
+
+        let opts = {};
+        opts["parent"] = $(".shadowHidden");
+        opts["start"] = date;
+        opts["end"] = opts["start"].addMinutes(60);
+        opts["title"] = " + New Event";
+        opts["priority"] = "0";
+        return new Task(opts);
     }
 
     placeEventDiv(offsetBoxCallBack, color, customClass, content) {
@@ -94,6 +119,7 @@ export class Calendar {
                 startDate: ev.attr("start_date"),
                 endDate: ev.attr("end_date"),
             };
+
             self.form.setupWithURL(window.location.href + "/new/", params);
             self.form.title = "Edit Task";
             self.form.show(function () {
@@ -105,9 +131,6 @@ export class Calendar {
 
                 self.form.popupDiv.draggable();
                 self.form.popupDiv.offset(position);
-                // self.form.popupDiv.position({
-                //     of: $(window)
-                // });
             });
         });
 

@@ -32,6 +32,11 @@
         <span class="text-danger"><%= error_tag f, :temp_date_end %></span>
     </div>
 
+    <div class="form-group">
+            <input type="text" class="endTime" value="<%= if @conn.params["endTime"] == nil, do: "", else: @conn.params["endTime"]%>">
+            <span class="text-danger"><%= error_tag f, :temp_date_end %></span>
+        </div>
+
     <%=# render TimeManagerWeb.LayoutView, "form/datetime_picker.html",
        # conn: @conn,
        # f: f

@@ -27,6 +27,7 @@ export class Popup {
         this._popupStyle = "small";
         this._hasTopBlueBar = true;
         this._uRL = null;
+        this._hidden = true;
 
         this._params = {};
 
@@ -40,6 +41,10 @@ export class Popup {
     get popupWrapper() {
         return this._popupWrapper;
     };
+
+    isHidden() {
+        return this._hidden;
+    }
 
     /**
      * @Public
@@ -116,7 +121,7 @@ export class Popup {
      * @param doAfterShowCbk function to be executed after show.
      */
     show(doAfterShowCbk) {
-        console.log("old show");
+        this._hidden = false;
         let scope = this;
         // if loading is assync
         if (!this._content) {
@@ -141,7 +146,7 @@ export class Popup {
      * Hide's popup.
      */
     hide() {
-        console.log("old hide");
+        this._hidden = true;
         this._popupWrapper.remove();
         this._popupWrapper = null;
         this._popupDiv = null;
