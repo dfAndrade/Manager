@@ -1,20 +1,23 @@
 .calendarWrapper .eventWrapper {
     background-color: #3c82dd;
     position: absolute;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
 
     -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
     -moz-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
 }
 
-.calendarWrapper .eventWrapper::before {
-    content: attr(display_text);
+.roundCorner.small {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+.calendarWrapper .eventWrapper .content {
     font-family: Arial, sans-serif;
     font-weight: bold;
-    font-size: 1.3vw;
+    font-size: 1.2vw;
     text-align: left;
     float: left;
     padding-left: 15%;

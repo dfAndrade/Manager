@@ -8,6 +8,8 @@ import {CalendarUtils} from "./CalendarUtils";
 require('webpack-jquery-ui/draggable');
 
 
+// TODO remove .iml from git
+
 export class Calendar {
     constructor() {
         this.today = new Date();
@@ -19,6 +21,7 @@ export class Calendar {
         this.form = new TaskEditor($("body"), "editTask");
         this.form.addActionButton("submit", null, null, function(form) {
             console.log(this.values);
+            console.log("hey");
         })
     }
 
@@ -96,7 +99,7 @@ export class Calendar {
         let offsetBox = offsetBoxCallBack();
         // var meta = getDivMeta();
 
-        let new_event = $("<div class='eventWrapper " + (customClass !== undefined ? customClass : "") + "'></div>").css({
+        let new_event = $("<div class='eventWrapper roundCorner small" + (customClass !== undefined ? customClass : "") + "'></div>").css({
             left: offsetBox[0],
             top: offsetBox[1],
             width: offsetBox[2],

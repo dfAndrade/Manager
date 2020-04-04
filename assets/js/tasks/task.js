@@ -39,7 +39,7 @@ export class Task {
     }
 
     _createDom() {
-        let eventDom = $("<div class='eventWrapper " + (Utils.isDefined(this._customClass) ? this._customClass : "") + "'></div>");
+        let eventDom = $("<div class='eventWrapper roundCorner small " + (Utils.isDefined(this._customClass) ? this._customClass : "") + "'></div>");
 
         if (Utils.isDefined(this._color)) {
             eventDom.css("background", this._color);
