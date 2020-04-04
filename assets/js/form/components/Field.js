@@ -20,25 +20,29 @@ import {Utils} from "../../Utils";
  */
 
 export class Field {
-    constructor(args) {
-        this._value = null;
-        this._containerClass = args["containerClass"];
-        this._parent = args["parent"];
+    constructor(parent, containerClass, args) {
+        // Mandatory
+        this._parent = parent;
+        this._containerClass = containerClass;
+        
+        // Optional
+        args = Utils.isDefined(args) ? args : {};
+        this._label = args["label"];
         this._onChangeCB = args["onChange"];
         this._defaultValue = args["defaultValue"];
-        this._label = args["label"];
+        
+        this._value = null;
         this.onChange = null;
 
         this._init();
     }
 
     /**
-     * Initializes self managing logic
+     * Initializes self managing logic 
+     * TODO: update doc 
      * @private
      */
     _init() {
-        this._setOnChange(); // Sets update logic
-        this._setDefault(this._defaultValue); // Sets a default value
         this._parent.addField(this); // Tells parent who this is
     }
 
@@ -105,6 +109,17 @@ export class Field {
     innerValidateValue(value) {
         return Utils.isDefined(value);
     }
+
+    /**
+     * Attaches events and updates dom
+     * TODO: update doc
+     */
+    build() {
+        this._setOnChange(); // Sets update logic
+        this._setDefault(this._defaultValue); // Sets a default value
+    }
+
+    destroy() {}
 
 
     /**

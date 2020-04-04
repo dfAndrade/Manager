@@ -3,9 +3,6 @@ import {Popup} from "./Popup.js"
 import {Utils} from "../Utils.js"
 
 
-// require("imports-loader?window.jQuery=jquery!../jquery-ui/jquery-ui.js");
-// import "../jquery-ui/jquery-ui.js"
-
 export class FormPopup extends Popup {
 
     constructor(div, popupClass) {
@@ -16,12 +13,29 @@ export class FormPopup extends Popup {
 
     addField(field) {
         this._fields[field.label] = field;
-        console.log(this._fields);
     }
 
     getField(label) {
         return this._fields[label];
     }
+
+    show(cb) {
+        let self = this;
+        super.show(function () {
+            for (let key in self._fields) {
+                if (!self._fields.hasOwnProperty(key)) continue;
+                self._fields[key].build();
+                // this._fields[key].onChange();
+            }
+            if (cb) cb();
+        });
+    }
+
+    hide() {
+        super.hide();
+    }
+
+
 
     triggerOnChange() {
         for (let key in this._fields) {

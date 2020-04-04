@@ -2,18 +2,17 @@
 <%= form_for @changeset, @action, [as: :post], fn f-> %>
 
     <div class="form-group">
-        <%= text_input f, :title, placeholder: (if @conn.params["title"] == nil, do: "Title", else: @conn.params["title"]), class: "form-control" %>
+        <%= text_input f, :title, placeholder: "Title", value: (if @conn.params["title"] == nil, do: "", else: @conn.params["title"]), class: "form-control titleSelector" %>
         <span class="text-danger"><%= error_tag f, :title %></span>
     </div>
 
     <div class="form-group">
-        <%= number_input f, :priority, placeholder: 0, class: "form-control" %>
+        <%= number_input f, :priority, value: 0, placeholder: 0, class: "form-control priorityPicker" %>
         <span class="text-danger"><%= error_tag f, :priority %></span>
     </div>
 
-
-    <div class="form-group">
-        <%= color_input f, :color, class: "form-control " %>
+    <div class="form-group"> 
+        <%= color_input f, :color, class: "form-control colorPicker" %>
         <span class="text-danger"><%= error_tag f, :color %></span>
     </div>
 

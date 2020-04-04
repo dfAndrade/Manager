@@ -1,6 +1,8 @@
-import {FormPopup} from "../form/FormPopup";
-import {DatePicker} from "../form/components/DatePicker";
-import {TimePicker} from "../form/components/TimePicker";
+import { FormPopup } from "../form/FormPopup";
+import { DatePicker } from "../form/components/DatePicker";
+import { TimePicker } from "../form/components/TimePicker";
+import { ColorPicker } from "../form/components/ColorPicker";
+import { TextField } from "../form/components/TextField";
 
 export class TaskEditor extends FormPopup {
 
@@ -11,43 +13,19 @@ export class TaskEditor extends FormPopup {
         this._color = null;
         this._start = null;
         this._end = null;
-        this._time = null;
+        this._startTime = null;
+        this._endTime = null;
 
         this._init();
     }
 
     _init() {
-        this._initStart();
-        this._initEnd();
-        this._initClock();
-    }
-
-    _initClock() {
-        let opts = {};
-
-        opts["parent"] = this;
-        opts["label"] = "time";
-        opts["containerClass"] = "startTime";
-
-        this._time = new TimePicker(opts);
-    }
-
-    _initStart() {
-        let opts = {};
-
-        opts["parent"] = this;
-        opts["label"] = "start";
-        opts["containerClass"] = "startDate";
-
-        this._start = new DatePicker(opts);
-    }
-
-    _initEnd() {
-        let opts = {};
-        opts["parent"] = this;
-        opts["label"] = "end";
-        opts["containerClass"] = "endDate";
-
-        this._end = new DatePicker(opts);
+        this._startTime = new TimePicker(this, "startTime");
+        this._endTime = new TimePicker(this, "endTime");
+        this._start = new DatePicker(this, "startDate");
+        this._end = new DatePicker(this, "endDate");
+        this._color = new ColorPicker(this, "colorPicker", { label: "color" });
+        this._priority = new TextField(this, "priorityPicker", { label: "priority" });
+        this._title = new TextField(this, "titleSelector", { label: "title" });
     }
 }

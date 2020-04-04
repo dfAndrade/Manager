@@ -1,9 +1,10 @@
-import {DatePicker} from "./DatePicker"
+import {Field} from "./Field"
 require("../datetime_picker/jquery-clockpicker.min.js");
 import '../../addons/clockpicker';
 
-export class TimePicker extends DatePicker {
-    _build() {
+export class TimePicker extends Field {
+    build() {
+        super.build();
         let self = this;
         let datePicker = $("." + this._containerClass);
         datePicker.clockpicker({
@@ -14,8 +15,7 @@ export class TimePicker extends DatePicker {
         });
     }
 
-    _destroy() {
-        console.log("REMOVE");
+    destroy() {
         $("." + this._containerClass).clockpicker("remove");
     }
 

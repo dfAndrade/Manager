@@ -114,28 +114,28 @@ export class Calendar {
             new_event.attr("display_text", content);
         }
 
-        new_event.on("click", function() {
-            let ev = $(this);
-            let params = {
-                startTime: ev.attr("start_time"),
-                endTime: ev.attr("end_time"),
-                startDate: ev.attr("start_date"),
-                endDate: ev.attr("end_date"),
-            };
+        // new_event.on("click", function() {
+        //     let ev = $(this);
+        //     let params = {
+        //         startTime: ev.attr("start_time"),
+        //         endTime: ev.attr("end_time"),
+        //         startDate: ev.attr("start_date"),
+        //         endDate: ev.attr("end_date"),
+        //     };
 
-            self.form.setupWithURL(window.location.href + "/new/", params);
-            self.form.title = "Edit Task";
-            self.form.show(function () {
-                self.form.triggerOnChange();
-                let position = ev.offset();
-                position.left += ev.width() + 10;
+        //     self.form.setupWithURL(window.location.href + "/new/", params);
+        //     self.form.title = "Edit Task";
+        //     self.form.show(function () {
+        //         self.form.triggerOnChange();
+        //         let position = ev.offset();
+        //         position.left += ev.width() + 10;
 
-                // TODO implement make draggable(startingPos) on Popup
+        //         // TODO implement make draggable(startingPos) on Popup
 
-                self.form.popupDiv.draggable();
-                self.form.popupDiv.offset(position);
-            });
-        });
+        //         self.form.popupDiv.draggable();
+        //         self.form.popupDiv.offset(position);
+        //     });
+        // });
 
         $(".shadowHidden").append(new_event);
 
@@ -161,9 +161,9 @@ export class Calendar {
         function placeTasks(tasks) {
 
             function temp(task) {
-                self.placeEventDiv(function () {
-                    return self.getBoxFromTask(task);
-                }, task.color, null, task.title);
+                // self.placeEventDiv(function () {
+                //     return self.getBoxFromTask(task);
+                // }, task.color, null, task.title);
             }
 
             for (let i = 0; i < tasks.length; i++) {

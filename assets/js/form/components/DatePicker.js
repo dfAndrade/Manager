@@ -7,31 +7,12 @@ import '../../addons/jquery-ui';
 $.datepicker.setDefaults( $.datepicker.regional[ "pt" ] );
 
 export class DatePicker extends Field {
-    constructor(opts) {
-        super(opts);
-        this._dinit();
+    constructor(parent, conrainerClass, opts) {
+        super(parent, conrainerClass, opts);
     }
 
-    _dinit() {
-        let self = this;
-        let oldShowCB = this._parent.show;
-        this._parent.show = function(cb) {
-            oldShowCB.call(self._parent, function () {
-                self._build();
-                if (cb) cb();
-            });
-        };
-
-        let oldHideCB = this._parent.hide;
-        this._parent.hide = function(cb) {
-            self._destroy();
-            oldHideCB.call(self._parent, cb);
-        };
-
-
-    }
-
-    _build() {
+    build() {
+        super.build();
         let self = this;
         let datePicker = $("." + this._containerClass);
         datePicker.datepicker({
@@ -42,7 +23,7 @@ export class DatePicker extends Field {
         });
     }
 
-    _destroy() {
+    destroy() {
         $("." + this._containerClass).datepicker("destroy");
     }
 
